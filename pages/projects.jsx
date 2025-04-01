@@ -1,7 +1,8 @@
 // pages/projects.jsx
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
-import ProjectCard from '../components/ProjectCard';
+import DetailProjectCard from '../components/DetailProjectCard';
 
 export default function Projects() {
   // プロジェクトデータ
@@ -39,11 +40,38 @@ export default function Projects() {
       image: "/images/project4.jpg",
       technologies: ["Python", "Discord.py", "FFmpeg"],
       githubUrl: "https://github.com/atsukitanaka0922/Mascachan"
+    },
+    {
+      id: 5,
+      title: "ポートフォリオサイト",
+      description: "Next.js、Tailwind CSS、Framer Motionを使用して開発した、このポートフォリオサイト。パーティクル背景とアニメーションを活用したモダンなUI/UXを提供し、レスポンシブデザインに対応。",
+      image: "/images/project5.jpg",
+      technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Responsive Design"],
     }
   ];
 
+  // アニメーションバリアント
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <Head>
         <title>Projects | My Portfolio</title>
         <meta name="description" content="My projects as a system engineer" />
@@ -52,14 +80,28 @@ export default function Projects() {
 
       <Navbar />
       
-      <main className="py-16 container mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8 text-center">プロジェクト</h1>
+      <main className="pt-24 pb-16 container mx-auto px-4">
+        <motion.h1 
+          className="text-3xl font-bold mb-12 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          プロジェクト
+        </motion.h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {projects.map(project => (
-            <ProjectCard key={project.id} project={project} />
+            <motion.div key={project.id} variants={itemVariants}>
+              <DetailProjectCard project={project} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </main>
 
       <footer className="bg-gray-800 text-white py-8">

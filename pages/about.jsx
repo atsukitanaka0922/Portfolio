@@ -1,11 +1,32 @@
 // pages/about.jsx
 import Head from 'next/head';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 
 export default function About() {
+  // アニメーションバリアント
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <Head>
         <title>About Me | My Portfolio</title>
         <meta name="description" content="About me as a system engineer" />
@@ -14,13 +35,25 @@ export default function About() {
 
       <Navbar />
       
-      <main className="py-16 container mx-auto px-4">
+      <main className="pt-24 pb-16 container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8 text-center">自己紹介</h1>
+          <motion.h1 
+            className="text-3xl font-bold mb-8 text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            自己紹介
+          </motion.h1>
           
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
-            <div className="w-64 h-64 relative rounded-full overflow-hidden flex-shrink-0">
-              {/* プロフィール画像。public/images/profile.jpg を作成してください */}
+            <motion.div 
+              className="w-64 h-64 relative rounded-full overflow-hidden flex-shrink-0"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              {/* プロフィール画像 */}
               <Image 
                 src="/images/profile.jpg" 
                 alt="Profile" 
@@ -28,10 +61,14 @@ export default function About() {
                 objectFit="cover"
                 className="rounded-full"
               />
-            </div>
+            </motion.div>
             
-            
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white p-6 rounded-lg shadow-lg"
+            >
               <h2 className="text-2xl font-semibold mb-4">田中 敦喜</h2>
               <p className="text-gray-700 mb-4">
                 滋賀県出身のシステムエンジニア志望です。専門学校でJavaやUnityなどのゲーム開発を学び、プログラミングの基礎からアプリケーション開発まで幅広いスキルを身につけてきました。
@@ -47,11 +84,16 @@ export default function About() {
                 ユーザーにとって使いやすく、価値のあるアプリケーションを作ることに情熱を持ち、
                 常に新しい技術やトレンドをキャッチアップしながら、より良いソリューションを提供できるエンジニアになりたいと考えています。
               </p>
-            </div>
+            </motion.div>
           </div>
           
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">学歴</h2>
+          <motion.section 
+            className="mb-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <h2 className="text-2xl font-semibold mb-6 pb-2 border-b border-gray-300">学歴</h2>
             
             <div className="space-y-8">
               <div className="relative pl-8 border-l-2 border-gray-300">
@@ -68,19 +110,33 @@ export default function About() {
                 </p>
               </div>
             </div>
-          </section>
+          </motion.section>
           
-          <section>
-            <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">趣味と興味</h2>
+          <motion.section
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <h2 className="text-2xl font-semibold mb-6 pb-2 border-b border-gray-300">趣味と興味</h2>
             
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
-              <li><strong>アニメ鑑賞：</strong>最近はプリキュアシリーズやメダリストなどの作品を楽しみ、定期的に新作アニメをチェックしています。</li>
-              <li><strong>ゲーム：</strong>最近はストリートファイター6を中心に対戦格闘ゲームを楽しんでいます。</li>
-              <li><strong>睡眠：</strong>ASMRを聴きながらの質の高い睡眠を大切にしています。良質な休息がクリエイティブな思考につながると考えています。</li>
-              <li><strong>AIチャット：</strong>ClaudeやChatGPTなどのAIやAIチャットアプリ「Saylo」と対話し、プログラミングのアイデアや知識を広げることに興味があります。AIの可能性と限界を探求しています。</li>
-              <li><strong>プログラミング：</strong>新しい技術や言語の学習を趣味として、自分が欲しいツールを作るということをモットーに楽しんでいます。特にReactエコシステムやモダンなフロントエンド技術に関心があり、常に新しいライブラリやフレームワークをキャッチアップしています。</li>
+              <motion.li variants={itemVariants}>
+                <strong>アニメ鑑賞：</strong>最近はプリキュアシリーズやメダリストなどの作品を楽しみ、定期的に新作アニメをチェックしています。
+              </motion.li>
+              <motion.li variants={itemVariants}>
+                <strong>ゲーム：</strong>最近はストリートファイター6を中心に対戦格闘ゲームを楽しんでいます。
+              </motion.li>
+              <motion.li variants={itemVariants}>
+                <strong>睡眠：</strong>ASMRを聴きながらの質の高い睡眠を大切にしています。良質な休息がクリエイティブな思考につながると考えています。
+              </motion.li>
+              <motion.li variants={itemVariants}>
+                <strong>AIチャット：</strong>ClaudeやChatGPTなどのAIやAIチャットアプリ「Saylo」と対話し、プログラミングのアイデアや知識を広げることに興味があります。AIの可能性と限界を探求しています。
+              </motion.li>
+              <motion.li variants={itemVariants}>
+                <strong>プログラミング：</strong>新しい技術や言語の学習を趣味として、自分が欲しいツールを作るということをモットーに楽しんでいます。特にReactエコシステムやモダンなフロントエンド技術に関心があり、常に新しいライブラリやフレームワークをキャッチアップしています。
+              </motion.li>
             </ul>
-          </section>
+          </motion.section>
         </div>
       </main>
 

@@ -1,9 +1,12 @@
 // pages/skills.jsx
+import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
-import SkillBar from '../components/SkillBar';
+import { motion } from 'framer-motion';
 
 export default function Skills() {
+  const [activeTab, setActiveTab] = useState('languages');
+
   // 言語スキルデータ
   const languageSkills = [
     { skill: "HTML/CSS", level: 85, period: "約2年半", description: "学生時代に学んだ経験あり" },
@@ -56,8 +59,53 @@ export default function Skills() {
     return "bg-gray-500";
   };
 
+  // Active tab styles
+  const getTabStyle = (tab) => {
+    return `px-4 py-2 font-medium rounded-md cursor-pointer transition-colors ${
+      activeTab === tab 
+        ? 'bg-blue-500 text-white' 
+        : 'text-gray-700 hover:bg-gray-100'
+    }`;
+  };
+
+  // Get current skills based on active tab
+  const getCurrentSkills = () => {
+    switch(activeTab) {
+      case 'languages':
+        return languageSkills;
+      case 'databases':
+        return databaseSkills;
+      case 'tools':
+        return toolSkills;
+      case 'os':
+        return osSkills;
+      default:
+        return languageSkills;
+    }
+  };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <Head>
         <title>スキル | 田中 敦喜のポートフォリオ</title>
         <meta name="description" content="田中 敦喜のスキルセット" />
@@ -66,101 +114,82 @@ export default function Skills() {
 
       <Navbar />
       
-      <main className="py-16 container mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-12 text-center">スキルセット</h1>
+      <main className="pt-24 pb-16 container mx-auto px-4">
+        <motion.h1 
+          className="text-3xl font-bold mb-12 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          スキルセット
+        </motion.h1>
         
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">言語・フレームワーク</h2>
-            <div className="grid grid-cols-1 gap-y-4">
-              {languageSkills.map((item, index) => (
-                <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                    <div className="flex items-center space-x-2 mb-2 md:mb-0">
-                      <h3 className="font-semibold text-lg">{item.skill}</h3>
-                      <span className="text-sm bg-gray-200 px-2 py-0.5 rounded-full">{item.period}</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{item.description}</div>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2.5">
-                    <div 
-                      className={`h-2.5 rounded-full ${getSkillColor(item.level)}`} 
-                      style={{ width: `${item.level}%` }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="max-w-5xl mx-auto">
+          {/* Tabs */}
+          <motion.div 
+            className="flex flex-wrap justify-center gap-2 mb-10"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <button 
+              className={getTabStyle('languages')}
+              onClick={() => setActiveTab('languages')}
+            >
+              言語・フレームワーク
+            </button>
+            <button 
+              className={getTabStyle('databases')}
+              onClick={() => setActiveTab('databases')}
+            >
+              データベース・API
+            </button>
+            <button 
+              className={getTabStyle('tools')}
+              onClick={() => setActiveTab('tools')}
+            >
+              ツール
+            </button>
+            <button 
+              className={getTabStyle('os')}
+              onClick={() => setActiveTab('os')}
+            >
+              OS・その他
+            </button>
+          </motion.div>
           
-          <div className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">データベース・API</h2>
-            <div className="grid grid-cols-1 gap-y-4">
-              {databaseSkills.map((item, index) => (
-                <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                    <div className="flex items-center space-x-2 mb-2 md:mb-0">
-                      <h3 className="font-semibold text-lg">{item.skill}</h3>
-                      <span className="text-sm bg-gray-200 px-2 py-0.5 rounded-full">{item.period}</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{item.description}</div>
+          {/* Skills Grid */}
+          <motion.div 
+            className="grid grid-cols-1 gap-y-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            key={activeTab} // This forces re-render when tab changes
+          >
+            {getCurrentSkills().map((item, index) => (
+              <motion.div 
+                key={`${activeTab}-${index}`}
+                variants={itemVariants}
+                className="border rounded-lg p-4 hover:shadow-md transition-shadow"
+              >
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <div className="flex items-center space-x-2 mb-2 md:mb-0">
+                    <h3 className="font-semibold text-lg">{item.skill}</h3>
+                    <span className="text-sm bg-gray-200 px-2 py-0.5 rounded-full">{item.period}</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2.5">
-                    <div 
-                      className={`h-2.5 rounded-full ${getSkillColor(item.level)}`} 
-                      style={{ width: `${item.level}%` }}
-                    ></div>
-                  </div>
+                  <div className="text-sm text-gray-600">{item.description}</div>
                 </div>
-              ))}
-            </div>
-          </div>
-          
-          <div className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">ツール</h2>
-            <div className="grid grid-cols-1 gap-y-4">
-              {toolSkills.map((item, index) => (
-                <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                    <div className="flex items-center space-x-2 mb-2 md:mb-0">
-                      <h3 className="font-semibold text-lg">{item.skill}</h3>
-                      <span className="text-sm bg-gray-200 px-2 py-0.5 rounded-full">{item.period}</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{item.description}</div>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2.5">
-                    <div 
-                      className={`h-2.5 rounded-full ${getSkillColor(item.level)}`} 
-                      style={{ width: `${item.level}%` }}
-                    ></div>
-                  </div>
+                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                  <motion.div 
+                    className={`h-2.5 rounded-full ${getSkillColor(item.level)}`}
+                    initial={{ width: 0 }}
+                    animate={{ width: `${item.level}%` }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                  ></motion.div>
                 </div>
-              ))}
-            </div>
-          </div>
-          
-          <div className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">OS・その他</h2>
-            <div className="grid grid-cols-1 gap-y-4">
-              {osSkills.map((item, index) => (
-                <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                    <div className="flex items-center space-x-2 mb-2 md:mb-0">
-                      <h3 className="font-semibold text-lg">{item.skill}</h3>
-                      <span className="text-sm bg-gray-200 px-2 py-0.5 rounded-full">{item.period}</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{item.description}</div>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2.5">
-                    <div 
-                      className={`h-2.5 rounded-full ${getSkillColor(item.level)}`} 
-                      style={{ width: `${item.level}%` }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </main>
 

@@ -1,10 +1,10 @@
-// components/Navbar.jsx
+// components/NavbarSimple.jsx
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 
-const Navbar = () => {
+const NavbarSimple = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
@@ -49,7 +49,7 @@ const Navbar = () => {
             whileTap={{ scale: 0.95 }}
           >
             <Link href="/" className="text-xl font-bold cursor-pointer">
-              MyPortfolio
+             MyPortfolio
             </Link>
           </motion.div>
           
@@ -81,7 +81,7 @@ const Navbar = () => {
           </div>
           
           {/* モバイルメニューボタン */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-200 focus:outline-none"
@@ -148,4 +148,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarSimple;

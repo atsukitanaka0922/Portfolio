@@ -1,11 +1,12 @@
 // pages/thanks.jsx
 import Head from 'next/head';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 
 export default function Thanks() {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <Head>
         <title>お問い合わせありがとうございます | 田中 敦喜のポートフォリオ</title>
         <meta name="description" content="Thank you for your message" />
@@ -14,9 +15,14 @@ export default function Thanks() {
 
       <Navbar />
       
-      <main className="py-16 container mx-auto px-4">
+      <main className="pt-24 pb-16 container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="mb-8">
+          <motion.div 
+            className="mb-8"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, type: "spring" }}
+          >
             <svg 
               className="w-20 h-20 text-green-500 mx-auto" 
               fill="none" 
@@ -31,17 +37,35 @@ export default function Thanks() {
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               ></path>
             </svg>
-          </div>
+          </motion.div>
           
-          <h1 className="text-3xl font-bold mb-4">お問い合わせありがとうございます</h1>
+          <motion.h1 
+            className="text-3xl font-bold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            お問い合わせありがとうございます
+          </motion.h1>
           
-          <p className="text-gray-700 text-lg mb-8">
+          <motion.p 
+            className="text-gray-700 text-lg mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
             メッセージを受け取りました。48時間以内にご返信いたします。
-          </p>
+          </motion.p>
           
-          <Link href="/" className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 inline-block">
-            ホームに戻る
-          </Link>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            <Link href="/" className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 inline-block">
+              ホームに戻る
+            </Link>
+          </motion.div>
         </div>
       </main>
 

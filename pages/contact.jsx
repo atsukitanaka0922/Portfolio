@@ -1,6 +1,8 @@
 // pages/contact.jsx
 import { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 
 export default function Contact() {
@@ -25,8 +27,28 @@ export default function Contact() {
     }));
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <Head>
         <title>Contact | 田中 敦喜のポートフォリオ</title>
         <meta name="description" content="Contact me for opportunities or collaborations" />
@@ -35,15 +57,30 @@ export default function Contact() {
 
       <Navbar />
       
-      <main className="py-16 container mx-auto px-4">
+      <main className="pt-24 pb-16 container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8 text-center">お問い合わせ</h1>
+          <motion.h1 
+            className="text-3xl font-bold mb-8 text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            お問い合わせ
+          </motion.h1>
           
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <p className="text-gray-700 mb-6">
+          <motion.div 
+            className="bg-white rounded-lg shadow-md p-6 mb-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.p 
+              className="text-gray-700 mb-6"
+              variants={itemVariants}
+            >
               もしこのサイトや私について、ポートフォリオについての質問やバグ報告がありましたら、お気軽にご連絡ください。
               できるだけ早くご返信いたします。
-            </p>
+            </motion.p>
             
             {formStatus.submitted && (
               <div className={`mb-6 p-4 rounded-md ${formStatus.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
@@ -58,7 +95,7 @@ export default function Contact() {
               <input type="hidden" name="_next" value="http://localhost:3000/thanks" />
               <input type="text" name="_honey" style={{ display: 'none' }} />
               
-              <div className="mb-4">
+              <motion.div className="mb-4" variants={itemVariants}>
                 <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
                   お名前 <span className="text-red-600">*</span>
                 </label>
@@ -71,9 +108,9 @@ export default function Contact() {
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
-              </div>
+              </motion.div>
               
-              <div className="mb-4">
+              <motion.div className="mb-4" variants={itemVariants}>
                 <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
                   メールアドレス <span className="text-red-600">*</span>
                 </label>
@@ -86,9 +123,9 @@ export default function Contact() {
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
-              </div>
+              </motion.div>
               
-              <div className="mb-4">
+              <motion.div className="mb-4" variants={itemVariants}>
                 <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">
                   件名
                 </label>
@@ -100,9 +137,9 @@ export default function Contact() {
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </div>
+              </motion.div>
               
-              <div className="mb-6">
+              <motion.div className="mb-6" variants={itemVariants}>
                 <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
                   メッセージ <span className="text-red-600">*</span>
                 </label>
@@ -115,22 +152,33 @@ export default function Contact() {
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 ></textarea>
-              </div>
+              </motion.div>
               
-              <button 
+              <motion.button 
                 type="submit"
                 className="w-full bg-blue-600 text-white py-3 px-6 rounded-md font-medium hover:bg-blue-700 transition duration-300"
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 送信する
-              </button>
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
           
-          <div className="mt-12">
+          <motion.div 
+            className="mt-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
             <h2 className="text-2xl font-semibold mb-6">他の連絡方法</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-lg shadow-md p-6">
+              <motion.div 
+                className="bg-white rounded-lg shadow-md p-6"
+                whileHover={{ y: -5 }}
+              >
                 <h3 className="text-xl font-medium mb-2">SNS</h3>
                 <ul className="space-y-2">
                   <li>
@@ -147,9 +195,12 @@ export default function Contact() {
                     </a>
                   </li>
                 </ul>
-              </div>
+              </motion.div>
               
-              <div className="bg-white rounded-lg shadow-md p-6">
+              <motion.div 
+                className="bg-white rounded-lg shadow-md p-6"
+                whileHover={{ y: -5 }}
+              >
                 <h3 className="text-xl font-medium mb-2">Eメール</h3>
                 <p className="mb-4">直接メールでのお問い合わせも歓迎します：</p>
                 <a 
@@ -158,9 +209,9 @@ export default function Contact() {
                 >
                   atsuki7660@gmail.com
                 </a>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </main>
 
