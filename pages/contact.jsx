@@ -92,7 +92,7 @@ export default function Contact() {
               {/* FormSubmitの設定 */}
               <input type="hidden" name="_subject" value="ポートフォリオサイトからのお問い合わせ" />
               <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_next" value="http://localhost:3000/thanks" />
+              <input type="hidden" name="_next" value="https://atsukitanakaportfolio.vercel.app/thanks" />
               <input type="text" name="_honey" style={{ display: 'none' }} />
               
               <motion.div className="mb-4" variants={itemVariants}>

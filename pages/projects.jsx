@@ -30,7 +30,7 @@ export default function Projects() {
       title: "YomuYama",
       description: "本の管理、シリーズの整理、読書進捗の追跡を行うReactウェブアプリケーション。Google Books APIを活用した書籍検索や読書タワーによる視覚化機能を搭載。",
       image: "/images/project3.jpg",
-      technologies: ["React", "Material-UI", "Firebase", "Google Books API", "PWA", "Framer Motion"],
+      technologies: ["React", "Material-UI", "Firebase", "Google Books API", "楽天ブックス書籍検索API", "PWA", "Framer Motion"],
       demoUrl: "https://yomuyama.com/",
       githubUrl: "https://github.com/atsukitanaka0922/YomuYama"
     },
