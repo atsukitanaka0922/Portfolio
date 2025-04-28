@@ -14,7 +14,8 @@ export default function Projects() {
       image: "/images/project1.jpg", // 画像はpublicフォルダに配置
       technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Firebase", "Zustand", "Framer Motion"],
       demoUrl: "https://shinchokudou.com/",
-      githubUrl: "https://github.com/atsukitanaka0922/shinchokudou"
+      githubUrl: "https://github.com/atsukitanaka0922/shinchokudou",
+      pdfUrl: "/pdfs/shinchokudou.pdf"
     },
     {
       id: 2,

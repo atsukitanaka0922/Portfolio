@@ -1,7 +1,14 @@
 // components/DetailProjectCard.jsx
 import { useState } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// PDFViewerをクライアントサイドのみでロード
+const PDFViewer = dynamic(() => import('./PDFViewer'), {
+  ssr: false,
+  loading: () => <div className="w-full h-96 bg-gray-100 flex items-center justify-center">PDFを読み込み中...</div>
+});
 
 const DetailProjectCard = ({ project }) => {
   const [showDetail, setShowDetail] = useState(false);
@@ -13,6 +20,9 @@ const DetailProjectCard = ({ project }) => {
   const toggleDetail = () => {
     setShowDetail(!showDetail);
   };
+
+  // プロジェクトにPDFがあるかチェック
+  const hasPDF = project.pdfUrl;
 
   return (
     <>
@@ -117,7 +127,6 @@ const DetailProjectCard = ({ project }) => {
           </div>
         </div>
       </motion.div>
-
       {/* 詳細モーダル */}
       <AnimatePresence>
         {showDetail && (
@@ -136,21 +145,26 @@ const DetailProjectCard = ({ project }) => {
               transition={{ type: 'spring', damping: 25 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative h-64 sm:h-80 md:h-96">
-                {project.image ? (
-                  <Image 
-                    src={project.image} 
-                    alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-t-xl"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gray-300 flex items-center justify-center rounded-t-xl">
-                    <span className="text-gray-600">No image</span>
-                  </div>
-                )}
-              </div>
+              {/* PDFがある場合はPDFViewerを表示、なければ画像を表示 */}
+              {hasPDF ? (
+                <PDFViewer pdfUrl={project.pdfUrl} />
+              ) : (
+                <div className="relative h-64 sm:h-80 md:h-96">
+                  {project.image ? (
+                    <Image 
+                      src={project.image} 
+                      alt={project.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-t-xl"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-300 flex items-center justify-center rounded-t-xl">
+                      <span className="text-gray-600">No image</span>
+                    </div>
+                  )}
+                </div>
+              )}
               
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
@@ -217,6 +231,18 @@ const DetailProjectCard = ({ project }) => {
                       className="px-5 py-2 bg-gray-800 text-white rounded-md font-medium hover:bg-gray-900 transition-colors"
                     >
                       GitHubで見る
+                    </a>
+                  )}
+                  
+                  {hasPDF && (
+                    <a 
+                      href={project.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2 bg-green-600 text-white rounded-md font-medium hover:bg-green-700 transition-colors"
+                      download
+                    >
+                      資料をダウンロード
                     </a>
                   )}
                 </div>
