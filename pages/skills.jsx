@@ -1,67 +1,96 @@
 // pages/skills.jsx
 import { useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
+
+// スキルロゴコンポーネント
+const SkillLogo = ({ skill, logo, bgColor }) => {
+  return (
+    <motion.div 
+      className={`flex flex-col items-center justify-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow`}
+      whileHover={{ y: -5, scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <div 
+        className={`w-16 h-16 flex items-center justify-center rounded-full mb-3 ${bgColor} p-2`}
+      >
+        <Image 
+          src={logo}
+          alt={`${skill} logo`}
+          width={40}
+          height={40}
+          style={{ 
+            objectFit: "contain",
+            maxWidth: "100%",
+            maxHeight: "100%"
+          }}
+        />
+      </div>
+      <p className="font-medium text-center text-sm mt-1">{skill}</p>
+    </motion.div>
+  );
+};
 
 export default function Skills() {
   const [activeTab, setActiveTab] = useState('languages');
 
-  // 言語スキルデータ
+  // 言語・フレームワークスキルデータ
   const languageSkills = [
-    { skill: "HTML/CSS", level: 85, period: "約2年半", description: "学生時代に学んだ経験あり" },
-    { skill: "JavaScript", level: 75, period: "1年1ヶ月", description: "「YomuYama」の制作で使用経験あり" },
-    { skill: "TypeScript", level: 65, period: "3ヶ月", description: "「進捗堂」の制作で使用経験あり" },
-    { skill: "React", level: 80, period: "3ヶ月", description: "ウェブアプリ開発で主に使用している" },
-    { skill: "Next.js", level: 75, period: "4ヶ月", description: "「進捗堂」「ポートフォリオサイト」の制作で使用経験あり" },
-    { skill: "Material-UI", level: 70, period: "1ヶ月", description: "「YomuYama」の制作で使用経験あり" },
-    { skill: "TailwindCSS", level: 70, period: "3ヶ月", description: "「進捗堂」の制作で使用経験あり" },
-    { skill: "Framer Motion", level: 65, period: "4ヶ月", description: "ウェブアプリ開発で主に使用している" },
-    { skill: "Python", level: 75, period: "4ヶ月", description: "PC向けアプリ開発で主に使用している" },
-    { skill: "Node.js", level: 65, period: "4ヶ月", description: "ウェブアプリ開発で主に使用している" },
-    { skill: "Firebase", level: 70, period: "4ヶ月", description: "ウェブアプリ開発で主に使用している" },
-    { skill: "Discord Bot開発", level: 60, period: "1ヶ月", description: "「ますかちゃん」の開発経験あり" },
-    { skill: "C++", level: 70, period: "約2年", description: "学生時代に学んだ経験あり" },
-    { skill: "C#", level: 75, period: "約2年", description: "ゲーム制作で使用経験あり" }
+    { skill: "HTML5", logo: "/logos/html5.svg", bgColor: "bg-orange-100" },
+    { skill: "CSS", logo: "/logos/css.svg", bgColor: "bg-blue-100" },
+    { skill: "JavaScript", logo: "/logos/javascript.svg", bgColor: "bg-yellow-100" },
+    { skill: "TypeScript", logo: "/logos/typescript.svg", bgColor: "bg-blue-100" },
+    { skill: "React", logo: "/logos/react.svg", bgColor: "bg-blue-100" },
+    { skill: "Next.js", logo: "/logos/nextjs.svg", bgColor: "bg-gray-100" },
+    { skill: "Material-UI", logo: "/logos/material-ui.svg", bgColor: "bg-blue-100" },
+    { skill: "TailwindCSS", logo: "/logos/tailwindcss.svg", bgColor: "bg-cyan-100" },
+    { skill: "Framer Motion", logo: "/logos/framer.svg", bgColor: "bg-purple-100" },
+    { skill: "Python", logo: "/logos/python.svg", bgColor: "bg-green-100" },
+    { skill: "Node.js", logo: "/logos/nodejs.svg", bgColor: "bg-green-100" },
+    { skill: "Firebase", logo: "/logos/firebase.svg", bgColor: "bg-yellow-100" },
+    { skill: "Discord.js", logo: "/logos/discord.svg", bgColor: "bg-indigo-100" },
+    { skill: "C++", logo: "/logos/cpp.svg", bgColor: "bg-gray-100" },
+    { skill: "C#", logo: "/logos/c.svg", bgColor: "bg-green-100" }
   ];
   
-  // データベーススキルデータ
+  // データベース・APIスキルデータ
   const databaseSkills = [
-    { skill: "Firestore", level: 70, period: "3ヶ月", description: "主に使用しているデータベース" },
-    { skill: "JSON Data Handling", level: 65, period: "3ヶ月", description: "Pythonツールなどで使用しているデータベース" },
-    { skill: "OpenWeatherMap", level: 60, period: "3ヶ月", description: "「進捗堂」の制作で使用経験あり" },
-    { skill: "Google Books API", level: 65, period: "1ヶ月", description: "「YomuYama」の制作で使用経験あり" }
+    { skill: "Firestore", logo: "/logos/firebase.svg", bgColor: "bg-yellow-100" },
+    { skill: "JSON", logo: "/logos/json.svg", bgColor: "bg-yellow-100" },
+    { skill: "OpenWeatherMap", logo: "/logos/openweather.svg", bgColor: "bg-blue-100" },
+    { skill: "Google Books API", logo: "/logos/google.svg", bgColor: "bg-red-100" },
+    { skill: "楽天ブックス書籍検索API", logo: "/logos/rakuten.svg", bgColor: "bg-blue-100" }
   ];
   
   // ツールスキルデータ
   const toolSkills = [
-    { skill: "Unity", level: 70, period: "約1年半", description: "ゲーム開発の経験あり" },
-    { skill: "Git / Github", level: 75, period: "3ヶ月", description: "制作物のGitなど" },
-    { skill: "Vercel", level: 65, period: "3ヶ月", description: "普段使っているプラットフォーム" },
-    { skill: "PWA", level: 60, period: "1ヶ月", description: "主なスマートフォンアプリケーション開発" },
-    { skill: "VSCode", level: 80, period: "3ヶ月", description: "主な制作ツール" },
-    { skill: "Visual Studio", level: 65, period: "約3年", description: "学生時代に学んだ経験あり" },
-    { skill: "Eclipse", level: 60, period: "約1年半", description: "学生時代に学んだ経験あり" },
-    { skill: "MOS", level: 75, period: "約2年半", description: "Excel,World,PowerPointなどの基本的な操作が可能" }
+    { skill: "Unity", logo: "/logos/unity.svg", bgColor: "bg-gray-100" },
+    { skill: "Git", logo: "/logos/git.svg", bgColor: "bg-orange-100" },
+    { skill: "GitHub", logo: "/logos/github.svg", bgColor: "bg-purple-100" },
+    { skill: "Vercel", logo: "/logos/vercel.svg", bgColor: "bg-gray-100" },
+    { skill: "PWA", logo: "/logos/pwa.svg", bgColor: "bg-blue-100" },
+    { skill: "VS Code", logo: "/logos/vscode.svg", bgColor: "bg-blue-100" },
+    { skill: "Visual Studio", logo: "/logos/visualstudio.svg", bgColor: "bg-purple-100" },
+    { skill: "Eclipse IDE", logo: "/logos/eclipseide.svg", bgColor: "bg-orange-100" },
+    { skill: "Microsoft Office", logo: "/logos/office.svg", bgColor: "bg-green-100" },
+    { skill: "LibreOffice", logo: "/logos/libreoffice.svg", bgColor: "bg-blue-100" },
+    { skill: "Canva", logo: "/logos/canva.svg", bgColor: "bg-orange-100" },
+    { skill: "Google Gemini", logo: "/logos/googlegemini.svg", bgColor: "bg-blue-100" },
+    { skill: "Claude", logo: "/logos/claude.svg", bgColor: "bg-orange-100" },
+    { skill: "ChatGPT", logo: "/logos/openai.svg", bgColor: "bg-green-100" }
   ];
   
   // OSスキルデータ
   const osSkills = [
-    { skill: "Windows", level: 90, period: "約18年", description: "基本的に使用しているOS" },
-    { skill: "Linux", level: 60, period: "3ヶ月", description: "環境構築中" },
+    { skill: "Windows", logo: "/logos/windows.svg", bgColor: "bg-blue-100" },
+    { skill: "Linux", logo: "/logos/linux.svg", bgColor: "bg-green-100" },
   ];
-
-  // skillLevelに応じた色を返す関数
-  const getSkillColor = (level) => {
-    if (level >= 80) return "bg-blue-600";
-    if (level >= 70) return "bg-green-600";
-    if (level >= 60) return "bg-yellow-500";
-    return "bg-gray-500";
-  };
 
   // Active tab styles
   const getTabStyle = (tab) => {
-    return `px-4 py-2 font-medium rounded-md cursor-pointer transition-colors ${
+    return `px-4 py-2 font-medium rounded-lg cursor-pointer transition-colors ${
       activeTab === tab 
         ? 'bg-blue-500 text-white' 
         : 'text-gray-700 hover:bg-gray-100'
@@ -124,7 +153,7 @@ export default function Skills() {
           スキルセット
         </motion.h1>
         
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Tabs */}
           <motion.div 
             className="flex flex-wrap justify-center gap-2 mb-10"
@@ -158,37 +187,47 @@ export default function Skills() {
             </button>
           </motion.div>
           
-          {/* Skills Grid */}
+          {/* Skills Grid - スマホのホーム画面のようなグリッド */}
           <motion.div 
-            className="grid grid-cols-1 gap-y-4"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             key={activeTab} // This forces re-render when tab changes
           >
-            {getCurrentSkills().map((item, index) => (
+            {getCurrentSkills().map((skill, index) => (
               <motion.div 
                 key={`${activeTab}-${index}`}
                 variants={itemVariants}
-                className="border rounded-lg p-4 hover:shadow-md transition-shadow"
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                  <div className="flex items-center space-x-2 mb-2 md:mb-0">
-                    <h3 className="font-semibold text-lg">{item.skill}</h3>
-                    <span className="text-sm bg-gray-200 px-2 py-0.5 rounded-full">{item.period}</span>
-                  </div>
-                  <div className="text-sm text-gray-600">{item.description}</div>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2.5">
-                  <motion.div 
-                    className={`h-2.5 rounded-full ${getSkillColor(item.level)}`}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${item.level}%` }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                  ></motion.div>
-                </div>
+                <SkillLogo 
+                  skill={skill.skill} 
+                  logo={skill.logo} 
+                  bgColor={skill.bgColor} 
+                />
               </motion.div>
             ))}
+          </motion.div>
+
+          {/* カテゴリの説明 */}
+          <motion.div
+            className="mt-12 bg-white p-6 rounded-xl shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <h2 className="text-xl font-semibold mb-4">
+              {activeTab === 'languages' && '言語・フレームワークについて'}
+              {activeTab === 'databases' && 'データベース・APIについて'}
+              {activeTab === 'tools' && 'ツールについて'}
+              {activeTab === 'os' && 'OS・その他について'}
+            </h2>
+            <p className="text-gray-700">
+              {activeTab === 'languages' && 'フロントエンド開発では主にReact、Next.js、TypeScriptを使用しています。また、UIデザインにはTailwind CSS、アニメーションにはFramer Motionを活用しています。バックエンドではNode.jsとFirebaseを使用し、Python、C#などのバックエンド言語も経験があります。'}
+              {activeTab === 'databases' && 'データベースはFirestoreを中心に使用しています。APIではOpenWeatherMapやGoogle Books APIなどの外部APIを活用した開発経験があります。'}
+              {activeTab === 'tools' && '開発環境としてはVSCodeを主に使用し、バージョン管理にはGit/GitHubを活用しています。デプロイにはVercelを使用し、PWAの開発経験もあります。ゲーム開発ではUnityの経験もあります。'}
+              {activeTab === 'os' && '主にWindowsを使用していますが、Linuxの基本的な知識もあります。'}
+            </p>
           </motion.div>
         </div>
       </main>
