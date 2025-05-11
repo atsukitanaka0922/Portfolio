@@ -1,5 +1,5 @@
 // components/DetailProjectCard.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,6 +12,13 @@ const PDFViewer = dynamic(() => import('./PDFViewer'), {
 
 const DetailProjectCard = ({ project }) => {
   const [showDetail, setShowDetail] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  
+  // コンポーネントがマウントされたかを確認
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
   
   // ポートフォリオプロジェクト用の特別な処理
   const isPortfolioProject = project.title.includes("ポートフォリオ");
@@ -19,10 +26,19 @@ const DetailProjectCard = ({ project }) => {
   // 詳細表示を切り替える関数
   const toggleDetail = () => {
     setShowDetail(!showDetail);
+    
+    // 詳細を開くときにコンソールログを出力
+    if (!showDetail) {
+      console.log("Opening project detail:", project.title);
+      console.log("Project has PDF:", !!project.pdfUrl);
+      if (project.pdfUrl) {
+        console.log("PDF URL:", project.pdfUrl);
+      }
+    }
   };
 
   // プロジェクトにPDFがあるかチェック
-  const hasPDF = project.pdfUrl;
+  const hasPDF = !!project.pdfUrl;
 
   return (
     <>
@@ -129,7 +145,7 @@ const DetailProjectCard = ({ project }) => {
       </motion.div>
       {/* 詳細モーダル */}
       <AnimatePresence>
-        {showDetail && (
+        {showDetail && mounted && (
           <motion.div
             className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
@@ -147,7 +163,9 @@ const DetailProjectCard = ({ project }) => {
             >
               {/* PDFがある場合はPDFViewerを表示、なければ画像を表示 */}
               {hasPDF ? (
-                <PDFViewer pdfUrl={project.pdfUrl} />
+                <div className="pdf-container" style={{ minHeight: '500px' }}>
+                  <PDFViewer pdfUrl={project.pdfUrl} />
+                </div>
               ) : (
                 <div className="relative h-64 sm:h-80 md:h-96">
                   {project.image ? (
@@ -211,7 +229,7 @@ const DetailProjectCard = ({ project }) => {
                   </div>
                 </div>
                 
-                <div className="flex space-x-4">
+                <div className="flex flex-wrap gap-4">
                   {project.demoUrl && (
                     <a 
                       href={project.demoUrl}
@@ -240,9 +258,8 @@ const DetailProjectCard = ({ project }) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-5 py-2 bg-green-600 text-white rounded-md font-medium hover:bg-green-700 transition-colors"
-                      download
                     >
-                      資料をダウンロード
+                      資料を直接開く
                     </a>
                   )}
                 </div>
