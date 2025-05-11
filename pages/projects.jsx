@@ -44,10 +44,18 @@ export default function Projects() {
     },
     {
       id: 5,
+      title: "Prime Select (模擬ECサイト)",
+      description: "PHPとMySQLで構築された模擬ECサイト。ユーザー認証、商品カタログ、ショッピングカート、チェックアウトプロセス、管理パネルなど、実務レベルの機能を実装。",
+      image: "/images/project6.jpg",
+      technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript", "jQuery", "HTML", "CSS", "MVC"],
+      githubUrl: "https://github.com/atsukitanaka0922/primeselect"
+    },
+    {
+      id: 6,
       title: "ポートフォリオサイト",
       description: "Next.js、Tailwind CSS、Framer Motionを使用して開発した、このポートフォリオサイト。パーティクル背景とアニメーションを活用したモダンなUI/UXを提供し、レスポンシブデザインに対応。",
       image: "/images/project5.jpg",
-      technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Responsive Design"],
+      technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     }
   ];
 

@@ -5,11 +5,11 @@ import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
 
-// スキルロゴコンポーネント
+// スキルロゴコンポーネント（レベル表示なし）
 const SkillLogo = ({ skill, logo, bgColor }) => {
   return (
     <motion.div 
-      className={`flex flex-col items-center justify-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow`}
+      className={`flex flex-col items-center justify-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow relative`}
       whileHover={{ y: -5, scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
@@ -28,64 +28,65 @@ const SkillLogo = ({ skill, logo, bgColor }) => {
           }}
         />
       </div>
-      <p className="font-medium text-center text-sm mt-1">{skill}</p>
+      <p className="font-medium text-center text-sm">{skill}</p>
     </motion.div>
   );
 };
 
 export default function Skills() {
-  const [activeTab, setActiveTab] = useState('languages');
+  const [activeTab, setActiveTab] = useState('frontend');
 
-  // 言語・フレームワークスキルデータ
-  const languageSkills = [
-    { skill: "HTML5", logo: "/logos/html5.svg", bgColor: "bg-orange-100" },
-    { skill: "CSS", logo: "/logos/css.svg", bgColor: "bg-blue-100" },
-    { skill: "JavaScript", logo: "/logos/javascript.svg", bgColor: "bg-yellow-100" },
-    { skill: "TypeScript", logo: "/logos/typescript.svg", bgColor: "bg-blue-100" },
+  // フロントエンドスキルデータ
+  const frontendSkills = [
     { skill: "React", logo: "/logos/react.svg", bgColor: "bg-blue-100" },
     { skill: "Next.js", logo: "/logos/nextjs.svg", bgColor: "bg-gray-100" },
-    { skill: "Material-UI", logo: "/logos/material-ui.svg", bgColor: "bg-blue-100" },
-    { skill: "TailwindCSS", logo: "/logos/tailwindcss.svg", bgColor: "bg-cyan-100" },
+    { skill: "TypeScript", logo: "/logos/typescript.svg", bgColor: "bg-blue-100" },
+    { skill: "JavaScript", logo: "/logos/javascript.svg", bgColor: "bg-yellow-100" },
+    { skill: "HTML5", logo: "/logos/html5.svg", bgColor: "bg-orange-100" },
+    { skill: "CSS", logo: "/logos/css.svg", bgColor: "bg-blue-100" },
+    { skill: "Tailwind CSS", logo: "/logos/tailwindcss.svg", bgColor: "bg-cyan-100" },
+    { skill: "Material UI", logo: "/logos/material-ui.svg", bgColor: "bg-blue-100" },
     { skill: "Framer Motion", logo: "/logos/framer.svg", bgColor: "bg-purple-100" },
-    { skill: "Python", logo: "/logos/python.svg", bgColor: "bg-green-100" },
+    { skill: "Bootstrap", logo: "/logos/bootstrap.svg", bgColor: "bg-purple-100" },
+    { skill: "jQuery", logo: "/logos/jquery.svg", bgColor: "bg-blue-100" },
+    { skill: "PWA", logo: "/logos/pwa.svg", bgColor: "bg-blue-100" }
+  ];
+  
+  // バックエンドスキルデータ
+  const backendSkills = [
+    { skill: "PHP", logo: "/logos/php.svg", bgColor: "bg-purple-100" },
     { skill: "Node.js", logo: "/logos/nodejs.svg", bgColor: "bg-green-100" },
+    { skill: "Python", logo: "/logos/python.svg", bgColor: "bg-green-100" },
     { skill: "Firebase", logo: "/logos/firebase.svg", bgColor: "bg-yellow-100" },
-    { skill: "Discord.js", logo: "/logos/discord.svg", bgColor: "bg-indigo-100" },
-    { skill: "C++", logo: "/logos/cpp.svg", bgColor: "bg-gray-100" },
-    { skill: "C#", logo: "/logos/c.svg", bgColor: "bg-green-100" }
-  ];
-  
-  // データベース・APIスキルデータ
-  const databaseSkills = [
+    { skill: "MySQL", logo: "/logos/mysql.svg", bgColor: "bg-blue-100" },
+    { skill: "MongoDB", logo: "/logos/mongodb.svg", bgColor: "bg-green-100" },
     { skill: "Firestore", logo: "/logos/firebase.svg", bgColor: "bg-yellow-100" },
-    { skill: "JSON", logo: "/logos/json.svg", bgColor: "bg-yellow-100" },
-    { skill: "OpenWeatherMap", logo: "/logos/openweather.svg", bgColor: "bg-blue-100" },
-    { skill: "Google Books API", logo: "/logos/google.svg", bgColor: "bg-red-100" },
-    { skill: "楽天ブックス書籍検索API", logo: "/logos/rakuten.svg", bgColor: "bg-blue-100" }
+    { skill: "C#", logo: "/logos/c.svg", bgColor: "bg-green-100" },
+    { skill: "C++", logo: "/logos/cpp.svg", bgColor: "bg-gray-100" },
+    { skill: "JSON", logo: "/logos/json.svg", bgColor: "bg-yellow-100" }
   ];
   
-  // ツールスキルデータ
+  // 外部APIとサービス
+  const apiSkills = [
+    { skill: "Google Books API", logo: "/logos/google.svg", bgColor: "bg-red-100" },
+    { skill: "楽天ブックスAPI", logo: "/logos/rakuten.svg", bgColor: "bg-red-100" },
+    { skill: "OpenWeatherMap", logo: "/logos/openweather.svg", bgColor: "bg-blue-100" },
+    { skill: "Discord API", logo: "/logos/discord.svg", bgColor: "bg-indigo-100" },
+    { skill: "Google Gemini API", logo: "/logos/google.svg", bgColor: "bg-yellow-100" }
+  ];
+  
+  // ツールとデプロイスキルデータ
   const toolSkills = [
-    { skill: "Unity", logo: "/logos/unity.svg", bgColor: "bg-gray-100" },
     { skill: "Git", logo: "/logos/git.svg", bgColor: "bg-orange-100" },
     { skill: "GitHub", logo: "/logos/github.svg", bgColor: "bg-purple-100" },
-    { skill: "Vercel", logo: "/logos/vercel.svg", bgColor: "bg-gray-100" },
-    { skill: "PWA", logo: "/logos/pwa.svg", bgColor: "bg-blue-100" },
+    { skill: "Vercel", logo: "/logos/vercel.svg", bgColor: "bg-orange-100" },
     { skill: "VS Code", logo: "/logos/vscode.svg", bgColor: "bg-blue-100" },
     { skill: "Visual Studio", logo: "/logos/visualstudio.svg", bgColor: "bg-purple-100" },
-    { skill: "Eclipse IDE", logo: "/logos/eclipseide.svg", bgColor: "bg-orange-100" },
-    { skill: "Microsoft Office", logo: "/logos/office.svg", bgColor: "bg-green-100" },
-    { skill: "LibreOffice", logo: "/logos/libreoffice.svg", bgColor: "bg-blue-100" },
-    { skill: "Canva", logo: "/logos/canva.svg", bgColor: "bg-orange-100" },
-    { skill: "Google Gemini", logo: "/logos/googlegemini.svg", bgColor: "bg-blue-100" },
-    { skill: "Claude", logo: "/logos/claude.svg", bgColor: "bg-orange-100" },
-    { skill: "ChatGPT", logo: "/logos/openai.svg", bgColor: "bg-green-100" }
-  ];
-  
-  // OSスキルデータ
-  const osSkills = [
-    { skill: "Windows", logo: "/logos/windows.svg", bgColor: "bg-blue-100" },
-    { skill: "Linux", logo: "/logos/linux.svg", bgColor: "bg-green-100" },
+    { skill: "Zustand", logo: "/logos/zustand.svg", bgColor: "bg-blue-100" },
+    { skill: "Unity", logo: "/logos/unity.svg", bgColor: "bg-gray-100" },
+    { skill: "FFmpeg", logo: "/logos/ffmpeg.svg", bgColor: "bg-green-100" },
+    { skill: "XAMPP", logo: "/logos/xampp.svg", bgColor: "bg-orange-100" },
+    { skill: "Figma", logo: "/logos/figma.svg", bgColor: "bg-purple-100" }
   ];
 
   // Active tab styles
@@ -100,16 +101,16 @@ export default function Skills() {
   // Get current skills based on active tab
   const getCurrentSkills = () => {
     switch(activeTab) {
-      case 'languages':
-        return languageSkills;
-      case 'databases':
-        return databaseSkills;
+      case 'frontend':
+        return frontendSkills;
+      case 'backend':
+        return backendSkills;
+      case 'api':
+        return apiSkills;
       case 'tools':
         return toolSkills;
-      case 'os':
-        return osSkills;
       default:
-        return languageSkills;
+        return frontendSkills;
     }
   };
 
@@ -162,28 +163,28 @@ export default function Skills() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <button 
-              className={getTabStyle('languages')}
-              onClick={() => setActiveTab('languages')}
+              className={getTabStyle('frontend')}
+              onClick={() => setActiveTab('frontend')}
             >
-              言語・フレームワーク
+              フロントエンド
             </button>
             <button 
-              className={getTabStyle('databases')}
-              onClick={() => setActiveTab('databases')}
+              className={getTabStyle('backend')}
+              onClick={() => setActiveTab('backend')}
             >
-              データベース・API
+              バックエンド
+            </button>
+            <button 
+              className={getTabStyle('api')}
+              onClick={() => setActiveTab('api')}
+            >
+              API・サービス
             </button>
             <button 
               className={getTabStyle('tools')}
               onClick={() => setActiveTab('tools')}
             >
-              ツール
-            </button>
-            <button 
-              className={getTabStyle('os')}
-              onClick={() => setActiveTab('os')}
-            >
-              OS・その他
+              ツール・開発環境
             </button>
           </motion.div>
           
@@ -203,7 +204,7 @@ export default function Skills() {
                 <SkillLogo 
                   skill={skill.skill} 
                   logo={skill.logo} 
-                  bgColor={skill.bgColor} 
+                  bgColor={skill.bgColor}
                 />
               </motion.div>
             ))}
@@ -217,17 +218,84 @@ export default function Skills() {
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <h2 className="text-xl font-semibold mb-4">
-              {activeTab === 'languages' && '言語・フレームワークについて'}
-              {activeTab === 'databases' && 'データベース・APIについて'}
-              {activeTab === 'tools' && 'ツールについて'}
-              {activeTab === 'os' && 'OS・その他について'}
+              {activeTab === 'frontend' && 'フロントエンド技術'}
+              {activeTab === 'backend' && 'バックエンド技術'}
+              {activeTab === 'api' && 'API・外部サービス'}
+              {activeTab === 'tools' && 'ツール・開発環境'}
             </h2>
             <p className="text-gray-700">
-              {activeTab === 'languages' && 'フロントエンド開発では主にReact、Next.js、TypeScriptを使用しています。また、UIデザインにはTailwind CSS、アニメーションにはFramer Motionを活用しています。バックエンドではNode.jsとFirebaseを使用し、Python、C#などのバックエンド言語も経験があります。'}
-              {activeTab === 'databases' && 'データベースはFirestoreを中心に使用しています。APIではOpenWeatherMapやGoogle Books APIなどの外部APIを活用した開発経験があります。'}
-              {activeTab === 'tools' && '開発環境としてはVSCodeを主に使用し、バージョン管理にはGit/GitHubを活用しています。デプロイにはVercelを使用し、PWAの開発経験もあります。ゲーム開発ではUnityの経験もあります。'}
-              {activeTab === 'os' && '主にWindowsを使用していますが、Linuxの基本的な知識もあります。'}
+              {activeTab === 'frontend' && 'React、Next.js、TypeScriptを中心にモダンなフロントエンド開発に取り組んでいます。UIデザインにはTailwind CSSやMaterial UIを活用し、Framer Motionでアニメーション効果を実装することで、魅力的なユーザー体験を提供しています。またBootstrapやレスポンシブデザインの知識も持ち合わせており、様々な環境に対応したWebアプリケーションの開発が可能です。'}
+              {activeTab === 'backend' && 'PHP、Node.js、Pythonなど複数の言語を使用したバックエンド開発の経験があります。データベースはMySQLを主に使用し、FirestoreなどのNoSQLデータベースも扱えます。MVCアーキテクチャやオブジェクト指向プログラミングの知識を活かして、保守性の高いコードを書くことを心がけています。また、RESTful APIの設計と実装も行っています。'}
+              {activeTab === 'api' && '外部APIとの連携経験があります。Google Books APIや楽天ブックス書籍検索APIを使った書籍管理アプリ、OpenWeatherMapを使った天気情報連携、Discord APIを使ったボット開発などを行いました。また、Google Geminiなどの生成AIとの統合も模索しています。これらのAPIを活用することで、より付加価値の高いアプリケーションを開発しています。'}
+              {activeTab === 'tools' && '開発効率を高めるために様々なツールを活用しています。バージョン管理にはGit/GitHubを使用し、VSCodeやVisual Studioなどのエディタを使いこなしています。デプロイ先としてはVercelを主に利用しています。また、状態管理にはZustandなどのライブラリを取り入れ、よりメンテナンスしやすいコードベースを構築しています。さらに、ゲーム開発のためのUnityや、音声処理のためのFFmpegなど、プロジェクトに応じた専門的なツールも使用できます。'}
             </p>
+          </motion.div>
+        </div>
+        
+        {/* プロジェクト別スキル活用セクション */}
+        <div className="max-w-6xl mx-auto mt-12">
+          <motion.h2 
+            className="text-2xl font-bold mb-6 text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            プロジェクトでの技術活用例
+          </motion.h2>
+          
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-3">進捗堂</h3>
+              <p className="mb-3 text-gray-700">AI搭載タスク管理アプリの開発では、フロントエンドにReact、Next.js、TypeScript、Tailwind CSSを活用し、状態管理にZustandを採用しました。バックエンドにはFirebaseを使用し、リアルタイムデータベースの実装やユーザー認証を行いました。</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">React</span>
+                <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">Next.js</span>
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">TypeScript</span>
+                <span className="px-2 py-1 bg-cyan-100 text-cyan-800 rounded-full text-xs">Tailwind CSS</span>
+                <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Firebase</span>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-3">Prime Select</h3>
+              <p className="mb-3 text-gray-700">ECサイト開発では、PHPとMySQLを使用してMVCアーキテクチャを実装し、フロントエンドにはBootstrapとjQueryを活用しました。ユーザー認証やショッピングカート、管理パネルなど、複雑な機能を実装する際にオブジェクト指向プログラミングの知識が役立ちました。</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">PHP</span>
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">MySQL</span>
+                <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Bootstrap</span>
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">jQuery</span>
+                <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">MVC</span>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-3">YomuYama</h3>
+              <p className="mb-3 text-gray-700">書籍管理アプリでは、ReactとMaterial UIを使ってモダンなUIを構築しました。Google Books APIと楽天ブックス書籍検索APIを活用して書籍検索機能を実装し、Firebaseでユーザーデータを管理しています。PWAとして実装することで、モバイルでも快適に使用できるようになっています。</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">React</span>
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Material UI</span>
+                <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Firebase</span>
+                <span className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">Google Books API</span>
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">PWA</span>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-3">ポートフォリオサイト</h3>
+              <p className="mb-3 text-gray-700">このポートフォリオサイトでは、Next.jsとReactをベースに、Tailwind CSSでスタイリングを行い、Framer Motionで様々なアニメーション効果を実装しました。レスポンシブデザインを考慮して、あらゆるデバイスで最適な表示になるよう設計しています。</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">Next.js</span>
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">React</span>
+                <span className="px-2 py-1 bg-cyan-100 text-cyan-800 rounded-full text-xs">Tailwind CSS</span>
+                <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Framer Motion</span>
+                <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Responsive Design</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </main>
