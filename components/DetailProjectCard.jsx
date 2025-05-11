@@ -4,8 +4,8 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// PDFViewerをクライアントサイドのみでロード
-const PDFViewer = dynamic(() => import('./PDFViewer'), {
+// BasicPDFViewerをクライアントサイドのみでロード
+const BasicPdfViewer = dynamic(() => import('./BasicPDFViewer'), {
   ssr: false,
   loading: () => <div className="w-full h-96 bg-gray-100 flex items-center justify-center">PDFを読み込み中...</div>
 });
@@ -161,10 +161,10 @@ const DetailProjectCard = ({ project }) => {
               transition={{ type: 'spring', damping: 25 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* PDFがある場合はPDFViewerを表示、なければ画像を表示 */}
+              {/* PDFがある場合はBasicPDFViewerを表示、なければ画像を表示 */}
               {hasPDF ? (
                 <div className="pdf-container" style={{ minHeight: '500px' }}>
-                  <PDFViewer pdfUrl={project.pdfUrl} />
+                  <BasicPdfViewer pdfUrl={project.pdfUrl} />
                 </div>
               ) : (
                 <div className="relative h-64 sm:h-80 md:h-96">
