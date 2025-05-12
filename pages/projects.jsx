@@ -45,9 +45,9 @@ export default function Projects() {
     {
       id: 5,
       title: "Prime Select (模擬ECサイト)",
-      description: "PHPとMySQLで構築された模擬ECサイト。ユーザー認証、商品カタログ、ショッピングカート、チェックアウトプロセス、管理パネルなど、実務レベルの機能を実装。",
+      description: "PHPとMySQLで構築された模擬ECサイト。ユーザー認証、商品カタログ、ショッピングカート、チェックアウトプロセス、管理パネルなど、実務レベルの機能を実装。商品画像などにはGoogle Geminiでの画像生成を用いている",
       image: "/images/project6.jpg",
-      technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript", "jQuery", "HTML", "CSS", "MVC"],
+      technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript", "jQuery", "HTML", "CSS", "Google Gemini"],
       githubUrl: "https://github.com/atsukitanaka0922/primeselect"
     },
     {
