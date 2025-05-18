@@ -26,19 +26,24 @@ const DetailProjectCard = ({ project }) => {
   // 詳細表示を切り替える関数
   const toggleDetail = () => {
     setShowDetail(!showDetail);
-    
-    // 詳細を開くときにコンソールログを出力
-    if (!showDetail) {
-      console.log("Opening project detail:", project.title);
-      console.log("Project has PDF:", !!project.pdfUrl);
-      if (project.pdfUrl) {
-        console.log("PDF URL:", project.pdfUrl);
-      }
-    }
   };
 
   // プロジェクトにPDFがあるかチェック
   const hasPDF = !!project.pdfUrl;
+
+  // タグの色を決定する関数
+  const getTagColor = (tag) => {
+    switch(tag) {
+      case 'アプリ':
+        return 'bg-blue-100 text-blue-800';
+      case 'ツール':
+        return 'bg-green-100 text-green-800';
+      case 'サイト':
+        return 'bg-purple-100 text-purple-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
 
   return (
     <>
@@ -62,6 +67,15 @@ const DetailProjectCard = ({ project }) => {
           ) : (
             <div className="w-full h-full bg-gray-300 flex items-center justify-center">
               <span className="text-gray-600">No image</span>
+            </div>
+          )}
+          
+          {/* タグを画像の右上に表示 */}
+          {project.tag && (
+            <div className="absolute top-2 right-2 z-20">
+              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTagColor(project.tag)}`}>
+                {project.tag}
+              </span>
             </div>
           )}
           
@@ -179,6 +193,15 @@ const DetailProjectCard = ({ project }) => {
                   ) : (
                     <div className="w-full h-full bg-gray-300 flex items-center justify-center rounded-t-xl">
                       <span className="text-gray-600">No image</span>
+                    </div>
+                  )}
+                  
+                  {/* タグを画像の右上に表示 */}
+                  {project.tag && (
+                    <div className="absolute top-4 right-4">
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${getTagColor(project.tag)}`}>
+                        {project.tag}
+                      </span>
                     </div>
                   )}
                 </div>

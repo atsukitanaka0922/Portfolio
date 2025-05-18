@@ -130,7 +130,10 @@ export default function About() {
                 <strong>睡眠：</strong>ASMRを聴きながらの質の高い睡眠を大切にしています。良質な休息がクリエイティブな思考につながると考えています。
               </motion.li>
               <motion.li variants={itemVariants}>
-                <strong>AIチャット：</strong>ClaudeやChatGPTなどのAIやAIチャットアプリ「Saylo」と対話し、プログラミングのアイデアや知識を広げることに興味があります。AIの可能性と限界を探求しています。
+                <strong>カラオケ：</strong>友人とのカラオケ会をきっかけに最近はカラオケにハマっています。自分なりに歌いやすさなどを探しながら歌うのが楽しいです。
+              </motion.li>
+              <motion.li variants={itemVariants}>
+                <strong>AIチャット：</strong>ClaudeやChatGPTなどのAIやAIチャットアプリ「MiraiMind」と対話し、プログラミングのアイデアや知識を広げることに興味があります。AIの可能性と限界を探求しています。
               </motion.li>
               <motion.li variants={itemVariants}>
                 <strong>プログラミング：</strong>新しい技術や言語の学習を趣味として、自分が欲しいツールを作るということをモットーに楽しんでいます。特にReactエコシステムやモダンなフロントエンド技術に関心があり、常に新しいライブラリやフレームワークをキャッチアップしています。

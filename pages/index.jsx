@@ -172,7 +172,7 @@ const SkillCard = ({ title, description, level, icon }) => {
 };
 
 export default function Home() {
-  // プロジェクトデータ
+  // プロジェクトデータ - タグを追加
   const projects = [
     {
       id: 1,
@@ -181,7 +181,8 @@ export default function Home() {
       image: "/images/project1.jpg",
       technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
       demoUrl: "https://shinchokudou.com/",
-      githubUrl: "https://github.com/atsukitanaka0922/shinchokudou"
+      githubUrl: "https://github.com/atsukitanaka0922/shinchokudou",
+      tag: "アプリ"
     },
     {
       id: 2,
@@ -190,16 +191,18 @@ export default function Home() {
       image: "/images/project3.jpg",
       technologies: ["React", "Material-UI", "Firebase", "Google Books API"],
       demoUrl: "https://yomuyama.com/",
-      githubUrl: "https://github.com/atsukitanaka0922/YomuYama"
+      githubUrl: "https://github.com/atsukitanaka0922/YomuYama",
+      tag: "アプリ"
     },
     {
-      id: 5,
+      id: 3,
       title: "ポートフォリオサイト",
       description: "Next.js、Tailwind CSS、Framer Motionを使用して開発した、このポートフォリオサイト。パーティクル背景とアニメーションを活用したモダンなUI/UXを提供し、レスポンシブデザインに対応。",
       image: "/images/project5.jpg",
       technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Responsive Design"],
       demoUrl: "/",
-      githubUrl: "https://github.com/atsukitanaka0922/portfolio"
+      githubUrl: "https://github.com/atsukitanaka0922/portfolio",
+      tag: "サイト"
     }
   ];
 
