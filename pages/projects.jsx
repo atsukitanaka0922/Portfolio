@@ -40,6 +40,7 @@ export default function Projects() {
       technologies: ["React", "Material-UI", "Firebase", "Google Books API", "楽天ブックス書籍検索API", "PWA", "Framer Motion"],
       demoUrl: "https://yomuyama.com/",
       githubUrl: "https://github.com/atsukitanaka0922/YomuYama",
+      pdfUrl: "/pdfs/yomuyama.pdf",
       tag: "アプリ"
     },
     {
