@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
+import YouTubePlayer from './YouTubePlayer';
 
 // BasicPDFViewerをクライアントサイドのみでロード
 const BasicPdfViewer = dynamic(() => import('./BasicPDFViewer'), {
@@ -30,6 +31,9 @@ const DetailProjectCard = ({ project }) => {
 
   // プロジェクトにPDFがあるかチェック
   const hasPDF = !!project.pdfUrl;
+  
+  // プロジェクトに動画があるかチェック
+  const hasVideo = !!project.videoUrl && project.videoUrl !== "YOUR_YOUTUBE_VIDEO_ID_HERE";
 
   // タグの色を決定する関数
   const getTagColor = (tag) => {
@@ -224,6 +228,14 @@ const DetailProjectCard = ({ project }) => {
                   <h3 className="text-lg font-semibold mb-2">プロジェクト概要</h3>
                   <p className="text-gray-700">{project.description}</p>
                 </div>
+
+                {/* YouTube動画の表示 (PDFの上に表示) */}
+                {hasVideo && (
+                  <YouTubePlayer 
+                    videoId={project.videoUrl} 
+                    title={`${project.title} - プロジェクト紹介動画`}
+                  />
+                )}
                 
                 {isPortfolioProject && (
                   <div className="mb-6">

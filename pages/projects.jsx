@@ -59,6 +59,8 @@ export default function Projects() {
       image: "/images/project6.jpg",
       technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript", "jQuery", "HTML", "CSS", "Google Gemini"],
       githubUrl: "https://github.com/atsukitanaka0922/primeselect",
+      pdfUrl: "/pdfs/primeselect.pdf",
+      videoUrl: "nKyDnXT3Ptw", // YouTubeの動画IDをここに設定してください
       tag: "サイト"
     },
     {
