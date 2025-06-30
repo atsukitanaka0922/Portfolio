@@ -9,6 +9,12 @@ import ProjectTags from '../components/ProjectTags';
 export default function Projects() {
   const [selectedTag, setSelectedTag] = useState('all');
   const [filteredProjects, setFilteredProjects] = useState([]);
+  const [isClient, setIsClient] = useState(false);
+
+  // コンポーネントがマウントされた時にクライアントサイドでの初期化を行う
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // プロジェクトデータ - タグを追加
   const projects = [
@@ -92,7 +98,14 @@ export default function Projects() {
       const filtered = projects.filter(project => project.tag === selectedTag);
       setFilteredProjects(filtered);
     }
-  }, [selectedTag, projects]);
+  }, [selectedTag]); // projectsを依存配列から除去
+
+  // 初期化時にプロジェクトを設定
+  useEffect(() => {
+    if (isClient) {
+      setFilteredProjects(projects);
+    }
+  }, [isClient]);
 
   // アニメーションバリアント
   const containerVariants = {

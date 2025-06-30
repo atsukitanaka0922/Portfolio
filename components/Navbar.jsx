@@ -25,6 +25,22 @@ const Navbar = () => {
     };
   }, []);
 
+  // ナビゲーション処理関数
+  const handleNavigation = async (href, e) => {
+    e.preventDefault();
+    setIsOpen(false); // モバイルメニューを閉じる
+    
+    if (router.pathname !== href) {
+      try {
+        await router.push(href);
+      } catch (error) {
+        console.error('Navigation error:', error);
+        // フォールバックとして通常のリンクナビゲーションを使用
+        window.location.href = href;
+      }
+    }
+  };
+
   // Active link variants for animation
   const linkVariants = {
     initial: { scale: 1, opacity: 0.8 },
@@ -48,9 +64,13 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link href="/" className="text-xl font-bold cursor-pointer">
+            <a
+              href="/"
+              onClick={(e) => handleNavigation("/", e)}
+              className="text-xl font-bold cursor-pointer"
+            >
               MyPortfolio
-            </Link>
+            </a>
           </motion.div>
           
           {/* デスクトップメニュー */}
@@ -69,13 +89,17 @@ const Navbar = () => {
                 whileHover="hover"
                 variants={linkVariants}
               >
-                <Link href={link.href} className={`px-3 py-2 rounded-md cursor-pointer ${
-                  router.pathname === link.href 
-                    ? 'font-medium text-blue-600' 
-                    : 'hover:text-blue-500'
-                }`}>
+                <a
+                  href={link.href}
+                  onClick={(e) => handleNavigation(link.href, e)}
+                  className={`px-3 py-2 rounded-md cursor-pointer ${
+                    router.pathname === link.href 
+                      ? 'font-medium text-blue-600' 
+                      : 'hover:text-blue-500'
+                  }`}
+                >
                   {link.label}
-                </Link>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -121,24 +145,23 @@ const Navbar = () => {
                 { href: "/projects", label: "Projects" },
                 { href: "/skills", label: "Skills" },
                 { href: "/contact", label: "Contact" }
-              ].map((link) => (
-                <motion.div
-                  key={link.href}
-                  whileHover={{ x: 10 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link 
-                    href={link.href} 
-                    className={`block px-3 py-2 rounded-md ${
-                      router.pathname === link.href 
-                        ? 'font-medium text-blue-600' 
-                        : 'hover:text-blue-500'
-                    } cursor-pointer`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
+              ].map((link) => (            <motion.div
+              key={link.href}
+              whileHover={{ x: 10 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <a
+                href={link.href}
+                onClick={(e) => handleNavigation(link.href, e)}
+                className={`block px-3 py-2 rounded-md ${
+                  router.pathname === link.href 
+                    ? 'font-medium text-blue-600' 
+                    : 'hover:text-blue-500'
+                } cursor-pointer`}
+              >
+                {link.label}
+              </a>
+            </motion.div>
               ))}
             </div>
           </motion.div>
