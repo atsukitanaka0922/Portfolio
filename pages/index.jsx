@@ -186,24 +186,23 @@ export default function Home() {
     },
     {
       id: 2,
-      title: "YomuYama",
-      description: "本の管理、シリーズの整理、読書進捗の追跡を行うReactウェブアプリケーション。Google Books APIを活用した書籍検索や読書タワーによる視覚化機能を搭載。",
-      image: "/images/project3.jpg",
-      technologies: ["React", "Material-UI", "Firebase", "Google Books API"],
-      demoUrl: "https://yomuyama.com/",
-      githubUrl: "https://github.com/atsukitanaka0922/YomuYama",
-      tag: "アプリ"
+      title: "Prime Select (模擬ECサイト)",
+      description: "PHPとMySQLで構築された模擬ECサイト。ユーザー認証、商品カタログ、ショッピングカート、チェックアウトプロセス、管理パネルなど、実務レベルの機能を実装。商品画像などにはGoogle Geminiでの画像生成を用いている",
+      image: "/images/project6.jpg",
+      technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript", "jQuery", "HTML", "CSS", "Google Gemini"],
+      githubUrl: "https://github.com/atsukitanaka0922/primeselect",
+      tag: "サイト"
     },
     {
       id: 3,
-      title: "ポートフォリオサイト",
-      description: "Next.js、Tailwind CSS、Framer Motionを使用して開発した、このポートフォリオサイト。パーティクル背景とアニメーションを活用したモダンなUI/UXを提供し、レスポンシブデザインに対応。",
-      image: "/images/project5.jpg",
-      technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Responsive Design"],
-      demoUrl: "/",
-      githubUrl: "https://github.com/atsukitanaka0922/portfolio",
+      title: "キュアサークル (Cure Circle)",
+      description: "プリキュアファン向けのプロフィール作成・共有サービス。お気に入りのプリキュアシリーズやキャラクターを登録し、デジタル名刺の作成、画像ギャラリーの管理、プレイリスト作成・共有（Spotify連携）、テーマ設定など、ファン同士の交流を促進するプラットフォーム。",
+      image: "/images/project7.jpg",
+      technologies: ["Next.js", "React", "TailwindCSS", "NextAuth.js", "Supabase", "Spotify API"],
+      githubUrl: "https://github.com/atsukitanaka0922/curecircle",
+      demoUrl: "https://www.curecircle.net/",
       tag: "サイト"
-    }
+    },
   ];
 
   // スキルデータ
