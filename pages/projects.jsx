@@ -76,6 +76,17 @@ export default function Projects() {
       image: "/images/project5.jpg",
       technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
       tag: "サイト"
+    },
+    {
+      id: 7,
+      title: "キュアサークル (Cure Circle)",
+      description: "プリキュアファン向けのプロフィール作成・共有サービス。お気に入りのプリキュアシリーズやキャラクターを登録し、デジタル名刺の作成、画像ギャラリーの管理、プレイリスト作成・共有（Spotify連携）、テーマ設定など、ファン同士の交流を促進するプラットフォーム。",
+      image: "/images/project7.jpg",
+      technologies: ["Next.js", "React", "TailwindCSS", "NextAuth.js", "Supabase", "Spotify API"],
+      githubUrl: "https://github.com/atsukitanaka0922/curecircle",
+      demoUrl: "https://www.curecircle.net/",
+      //pdfUrl: "/pdfs/curecircle.pdf",
+      tag: "サイト"
     }
   ];
 

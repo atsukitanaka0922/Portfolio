@@ -58,9 +58,11 @@ export default function Skills() {
     { skill: "Node.js", logo: "/logos/nodejs.svg", bgColor: "bg-green-100" },
     { skill: "Python", logo: "/logos/python.svg", bgColor: "bg-green-100" },
     { skill: "Firebase", logo: "/logos/firebase.svg", bgColor: "bg-yellow-100" },
+    { skill: "Supabase", logo: "/logos/supabase.svg", bgColor: "bg-green-100" },
     { skill: "MySQL", logo: "/logos/mysql.svg", bgColor: "bg-blue-100" },
     { skill: "MongoDB", logo: "/logos/mongodb.svg", bgColor: "bg-green-100" },
     { skill: "Firestore", logo: "/logos/firebase.svg", bgColor: "bg-yellow-100" },
+    { skill: "NextAuth.js", logo: "/logos/nextjs.svg", bgColor: "bg-blue-100" },
     { skill: "C#", logo: "/logos/c.svg", bgColor: "bg-green-100" },
     { skill: "C++", logo: "/logos/cpp.svg", bgColor: "bg-gray-100" },
     { skill: "JSON", logo: "/logos/json.svg", bgColor: "bg-yellow-100" }
@@ -72,7 +74,8 @@ export default function Skills() {
     { skill: "楽天ブックスAPI", logo: "/logos/rakuten.svg", bgColor: "bg-red-100" },
     { skill: "OpenWeatherMap", logo: "/logos/openweather.svg", bgColor: "bg-blue-100" },
     { skill: "Discord API", logo: "/logos/discord.svg", bgColor: "bg-indigo-100" },
-    { skill: "Google Gemini API", logo: "/logos/google.svg", bgColor: "bg-yellow-100" }
+    { skill: "Google Gemini API", logo: "/logos/google.svg", bgColor: "bg-yellow-100" },
+    { skill: "Spotify API", logo: "/logos/spotify.svg", bgColor: "bg-green-100" }
   ];
   
   // ツールとデプロイスキルデータ
@@ -225,8 +228,8 @@ export default function Skills() {
             </h2>
             <p className="text-gray-700">
               {activeTab === 'frontend' && 'React、Next.js、TypeScriptを中心にモダンなフロントエンド開発に取り組んでいます。UIデザインにはTailwind CSSやMaterial UIを活用し、Framer Motionでアニメーション効果を実装することで、魅力的なユーザー体験を提供しています。またBootstrapやレスポンシブデザインの知識も持ち合わせており、様々な環境に対応したWebアプリケーションの開発が可能です。'}
-              {activeTab === 'backend' && 'PHP、Node.js、Pythonなど複数の言語を使用したバックエンド開発の経験があります。データベースはMySQLを主に使用し、FirestoreなどのNoSQLデータベースも扱えます。MVCアーキテクチャやオブジェクト指向プログラミングの知識を活かして、保守性の高いコードを書くことを心がけています。また、RESTful APIの設計と実装も行っています。'}
-              {activeTab === 'api' && '外部APIとの連携経験があります。Google Books APIや楽天ブックス書籍検索APIを使った書籍管理アプリ、OpenWeatherMapを使った天気情報連携、Discord APIを使ったボット開発などを行いました。また、Google Geminiなどの生成AIとの統合も模索しています。これらのAPIを活用することで、より付加価値の高いアプリケーションを開発しています。'}
+              {activeTab === 'backend' && 'PHP、Node.js、Pythonなど複数の言語を使用したバックエンド開発の経験があります。データベースはMySQLを主に使用し、FirestoreやSupabaseなどのNoSQLデータベースも扱えます。認証機能についてはNextAuth.jsやSupabase Authを使用し、セキュアなユーザー管理を実装しています。MVCアーキテクチャやオブジェクト指向プログラミングの知識を活かして、保守性の高いコードを書くことを心がけています。また、RESTful APIの設計と実装も行っています。'}
+              {activeTab === 'api' && '外部APIとの連携経験があります。Google Books APIや楽天ブックス書籍検索APIを使った書籍管理アプリ、OpenWeatherMapを使った天気情報連携、Discord APIを使ったボット開発、Spotify APIを使ったプレイリスト作成・共有機能などを実装しました。また、Google Geminiなどの生成AIとの統合も模索しています。これらのAPIを活用することで、より付加価値の高いアプリケーションを開発しています。'}
               {activeTab === 'tools' && '開発効率を高めるために様々なツールを活用しています。バージョン管理にはGit/GitHubを使用し、VSCodeやVisual Studioなどのエディタを使いこなしています。デプロイ先としてはVercelを主に利用しています。また、状態管理にはZustandなどのライブラリを取り入れ、よりメンテナンスしやすいコードベースを構築しています。さらに、ゲーム開発のためのUnityや、音声処理のためのFFmpegなど、プロジェクトに応じた専門的なツールも使用できます。'}
             </p>
           </motion.div>
@@ -282,6 +285,19 @@ export default function Skills() {
                 <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Firebase</span>
                 <span className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">Google Books API</span>
                 <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">PWA</span>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-3">キュアサークル</h3>
+              <p className="mb-3 text-gray-700">プリキュアファン向けのプロフィール作成・共有サービスでは、Next.jsとReactでフロントエンドを構築し、TailwindCSSでデザインを実装しました。認証機能にはNextAuth.jsを使用し、データベースとファイルストレージにはSupabaseを活用しています。また、Spotify APIとの連携によりプレイリスト作成・共有機能を実現しています。</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">Next.js</span>
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">React</span>
+                <span className="px-2 py-1 bg-cyan-100 text-cyan-800 rounded-full text-xs">TailwindCSS</span>
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">NextAuth.js</span>
+                <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Supabase</span>
+                <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Spotify API</span>
               </div>
             </div>
             
