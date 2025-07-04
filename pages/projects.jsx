@@ -85,7 +85,7 @@ export default function Projects() {
       technologies: ["Next.js", "React", "TailwindCSS", "NextAuth.js", "Supabase", "Spotify API"],
       githubUrl: "https://github.com/atsukitanaka0922/curecircle",
       demoUrl: "https://www.curecircle.net/",
-      //pdfUrl: "/pdfs/curecircle.pdf",
+      pdfUrl: "/pdfs/curecircle.pdf",
       tag: "サイト"
     }
   ];
