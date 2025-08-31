@@ -79,7 +79,7 @@ export default function Contact() {
               variants={itemVariants}
             >
               もしこのサイトや私について、ポートフォリオについての質問やバグ報告がありましたら、お気軽にご連絡ください。
-              できるだけ早くご返信いたします。
+              できるだけ早くご返信いたします。お仕事については現在、受け付けておりません。
             </motion.p>
             
             {formStatus.submitted && (

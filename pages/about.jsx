@@ -72,7 +72,7 @@ export default function About() {
               <h2 className="text-2xl font-semibold mb-4">田中 敦喜</h2>
               <p className="text-gray-700 mb-4">
                 滋賀県出身のシステムエンジニア志望です。専門学校でJavaやUnityなどのゲーム開発を学び、プログラミングの基礎からアプリケーション開発まで幅広いスキルを身につけてきました。
-                現在は就労移行支援でIT業界を中心に就職活動を行っており、自己成長と実践的な経験を積むために自己理解を中心にプログラムやオフィスワークに取り組んでいます。
+                現在はフリーランスエンジニアとして独立に成功し、プロジェクトを進めております
               </p>
               <p className="text-gray-700 mb-4">
                 独学でReact、Next.js、TypeScriptなどのモダンな技術を学び、「進捗堂」「YomuYama」などのWebアプリケーションを開発しました。
@@ -121,10 +121,10 @@ export default function About() {
             
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
               <motion.li variants={itemVariants}>
-                <strong>アニメ鑑賞：</strong>最近はプリキュアシリーズやメダリストなどの作品を楽しみ、定期的に新作アニメをチェックしています。
+                <strong>アニメ鑑賞：</strong>最近はプリキュアシリーズやなどの作品を楽しみ、定期的に新作アニメをチェックしています。
               </motion.li>
               <motion.li variants={itemVariants}>
-                <strong>ゲーム：</strong>最近はストリートファイター6を中心に対戦格闘ゲームを楽しんでいます。
+                <strong>ゲーム：</strong>最近はストリートファイター6を中心に対戦格闘ゲームを楽しんでいます。プラチナ1のモダンマリーザをメインに使ってます（笑）
               </motion.li>
               <motion.li variants={itemVariants}>
                 <strong>睡眠：</strong>ASMRを聴きながらの質の高い睡眠を大切にしています。良質な休息がクリエイティブな思考につながると考えています。
