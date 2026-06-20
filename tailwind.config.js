@@ -4,15 +4,23 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class', // Enable class-based dark mode
   theme: {
     extend: {
       fontFamily: {
         sans: ['Noto Sans JP', 'sans-serif'],
       },
       colors: {
-        // カスタムカラー
-        'primary': {
+        // Frutiger Aero パレット
+        aero: {
+          skytop: '#cdeeff',
+          sky: '#9fdcf7',
+          aqua: '#36b6e8',
+          deep: '#0a6cb0',
+          green: '#8bd450',
+          greenDeep: '#4ea832',
+          ink: '#0b3a5b',
+        },
+        primary: {
           50: '#EBF5FF',
           100: '#E1EFFE',
           200: '#C3DDFD',

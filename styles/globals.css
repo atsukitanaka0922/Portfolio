@@ -4,27 +4,316 @@
 
 @import "tailwindcss";
 
+/* =========================================================================
+   Frutiger Aero デザインシステム
+   - 空・水・ガラス・光沢・バブルをモチーフにした 2000年代後半風のUI。
+   - Tailwind v4 のJS設定読み込み有無に左右されないよう、Aero専用の見た目は
+     すべて素のCSSで定義しています（レイアウトはTailwindユーティリティを使用）。
+   ========================================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --aero-sky-top: #cdeeff;
+  --aero-sky: #9fdcf7;
+  --aero-aqua: #36b6e8;
+  --aero-deep: #0a6cb0;
+  --aero-green: #8bd450;
+  --aero-green-deep: #4ea832;
+  --aero-ink: #0b3a5b;
+
+  --background: var(--aero-sky-top);
+  --foreground: var(--aero-ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--aero-ink);
+  font-family: "Noto Sans JP", Arial, Helvetica, sans-serif;
+  /* 上空（水色）→海（アクア）→水辺（グリーン）の空グラデーション */
+  background: linear-gradient(
+    180deg,
+    #cdeeff 0%,
+    #9fdcf7 26%,
+    #7fd3ef 50%,
+    #bfe9d8 82%,
+    #aee6b8 100%
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* --- 見出しのガラス感（淡い光のにじみ） --- */
+h1, h2, h3 {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6), 0 2px 6px rgba(10, 80, 140, 0.18);
+}
+
+.hero-text {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* --- グラデーション文字 --- */
+/* 淡い空背景でも読みやすいよう、深めのブルー〜ティールで構成し、
+   見出し共通の白いにじみ(text-shadow)は打ち消して輪郭をはっきりさせる。 */
+.aero-gradient-text {
+  background: linear-gradient(100deg, #06365f, #0a5a9c 48%, #0c6e6a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 1px 1px rgba(8, 55, 100, 0.22));
+}
+
+/* =========================================================================
+   ガラスパネル
+   ========================================================================= */
+.aero-glass {
+  position: relative;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 255, 255, 0.42) 48%,
+    rgba(222, 244, 255, 0.4) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 12px 32px -10px rgba(10, 80, 140, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -12px 26px -14px rgba(10, 80, 140, 0.18);
+  backdrop-filter: blur(12px) saturate(135%);
+  -webkit-backdrop-filter: blur(12px) saturate(135%);
+}
+
+/* 上端のガラスのてかり */
+.aero-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 42%);
+  pointer-events: none;
+}
+
+/* 中身がてかりの上に来るように */
+.aero-glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+.aero-glass-strong {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(255, 255, 255, 0.82) 55%,
+    rgba(232, 248, 255, 0.86) 100%
+  );
+}
+
+/* =========================================================================
+   光沢ボタン（Aero / Aqua 調）
+   ========================================================================= */
+.aero-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 8px 18px -6px rgba(10, 80, 140, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -9px 14px -8px rgba(0, 0, 0, 0.28);
+  background: linear-gradient(to bottom, #4fc3f7, #1e88e5 55%, #1565c0);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* 上半分の強いてかり */
+.aero-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.aero-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
+.aero-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+.aero-btn:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+.aero-btn--green {
+  background: linear-gradient(to bottom, #b6e86f, #7cb342 55%, #558b2f);
+}
+
+.aero-btn--ghost {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.55));
+  color: #0a4f7a;
+  text-shadow: none;
+}
+
+.aero-btn--dark {
+  background: linear-gradient(to bottom, #475569, #1f2937 55%, #111827);
+}
+
+/* =========================================================================
+   小さなガラスタグ／チップ
+   ========================================================================= */
+.aero-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(235, 248, 255, 0.7));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 2px 4px rgba(10, 80, 140, 0.12);
+  color: #0a4f7a;
+}
+
+/* =========================================================================
+   バブル（浮遊する泡）
+   ========================================================================= */
+.aero-bubble {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 32% 26%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.25) 38%,
+    rgba(150, 215, 255, 0.16) 68%,
+    rgba(120, 190, 255, 0.05) 100%
+  );
+  box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.65), 0 0 12px rgba(180, 230, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* 大きなボケ光（背景の柔らかい光） */
+.aero-bokeh {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(8px);
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+
+@keyframes aero-rise {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.9);
+    opacity: 0;
+  }
+  12% {
+    opacity: var(--bubble-opacity, 0.55);
+  }
+  88% {
+    opacity: var(--bubble-opacity, 0.55);
+  }
+  100% {
+    transform: translateY(-112vh) translateX(var(--bubble-drift, 24px)) scale(1.12);
+    opacity: 0;
+  }
+}
+
+@keyframes aero-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-aero-bob {
+  animation: aero-bob 5s ease-in-out infinite;
+}
+
+/* タイピングカーソルの点滅 */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* =========================================================================
+   アクセシビリティ：キーボードフォーカスを明確に
+   ========================================================================= */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #1565c0;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.aero-btn:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.95);
+  outline-offset: 2px;
+}
+
+/* スクリーンリーダー専用テキスト */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================================================================
+   アニメーション軽減設定の尊重
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .aero-bubble,
+  .aero-bokeh,
+  .animate-aero-bob,
+  .animate-blink {
+    animation: none !important;
+  }
+  .aero-bubble {
+    opacity: var(--bubble-opacity, 0.4) !important;
+  }
 }
